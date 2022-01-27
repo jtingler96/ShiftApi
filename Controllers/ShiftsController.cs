@@ -81,7 +81,7 @@ namespace ShiftApi.Controllers
             _context.Shifts.Add(shift);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetShift), new { id = shift.Id }, shift);
+            return CreatedAtAction(nameof(GetShift), new { id = shift.Id, HoursWorked = ShiftService.getTimeSpan(shift.ClockIn, shift.ClockOut) }, shift);
         }
 
         // DELETE: api/Shifts/5
