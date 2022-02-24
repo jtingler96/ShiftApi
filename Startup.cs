@@ -23,8 +23,8 @@ namespace ShiftApi
         {
 
             services.AddControllers();
-            services.AddDbContext<ShiftContext>(opt =>
-                                               opt.UseInMemoryDatabase("Shifts"));
+            services.AddDbContext<ShiftContext>(options =>
+                                               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoApi", Version = "v1" });

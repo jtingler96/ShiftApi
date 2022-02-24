@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ShiftApi
 {
@@ -10,7 +7,7 @@ namespace ShiftApi
         public static TimeSpan getTimeSpan(DateTime start, DateTime end)
         {
 
-            TimeSpan duration = end.Subtract(start).to;
+            TimeSpan duration = end.Subtract(start);
             
 
             return duration;

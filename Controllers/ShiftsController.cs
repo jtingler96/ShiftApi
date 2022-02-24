@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShiftApi;
 using ShiftApi.Models;
 
 namespace ShiftApi.Controllers
@@ -78,10 +75,12 @@ namespace ShiftApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Shift>> PostShift(Shift shift)
         {
+            shift.HoursWorked = ShiftService.getTimeSpan(shift.ClockIn, shift.ClockOut);
+            shift.ShiftEarnings = shift.HoursWorked.Hours * shift.HourlyRate;
             _context.Shifts.Add(shift);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetShift), new { id = shift.Id, HoursWorked = ShiftService.getTimeSpan(shift.ClockIn, shift.ClockOut) }, shift);
+            return CreatedAtAction(nameof(GetShift), new { id = shift.Id }, shift);
         }
 
         // DELETE: api/Shifts/5
